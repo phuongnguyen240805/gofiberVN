@@ -34,7 +34,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'medusa-public-images.s3.eu-west-1.amazonaws.com' },
     ],
   },
-  output: 'standalone',
+  // output: 'standalone',
   // 🔥 BẮT BUỘC: loại bỏ các module không tương thích với Cloudflare Workers
   webpack: (config, { isServer, dev }) => {
     if (isServer && !dev) {

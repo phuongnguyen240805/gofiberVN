@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@c15t/nextjs':
         specifier: ^1.8.1
-        version: 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(pg@8.11.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
+        version: 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(pg@8.16.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
       '@c15t/scripts':
         specifier: ^1.0.1
         version: 1.0.1
@@ -22,7 +22,7 @@ importers:
         version: 2.11.3
       '@medusajs/medusa-js':
         specifier: ^6.1.10
-        version: 6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))))
+        version: 6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))))
       '@medusajs/types':
         specifier: ^2.11.3
         version: 2.11.3(ioredis@5.8.2)
@@ -109,7 +109,7 @@ importers:
         version: 10.45.1(@trpc/server@10.45.1)
       '@trpc/next':
         specifier: 10.45.1
-        version: 10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/react-query@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.1)(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/react-query@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.1)(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/react-query':
         specifier: 10.45.1
         version: 10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -118,7 +118,7 @@ importers:
         version: 10.45.1
       '@vercel/analytics':
         specifier: ^1.0.1
-        version: 1.5.0(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.5.0(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       animejs:
         specifier: ^4.2.2
         version: 4.2.2
@@ -150,20 +150,20 @@ importers:
         specifier: ^0.553.0
         version: 0.553.0(react@18.3.1)
       next:
-        specifier: ^15.5.6
-        version: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 15.5.9
+        version: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-auth:
         specifier: ^4.24.13
-        version: 4.24.13(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.24.13(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next-i18next:
         specifier: ^14.0.0
-        version: 14.0.3(@types/react@18.2.55)(i18next@23.16.8)(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 14.0.3(@types/react@18.2.55)(i18next@23.16.8)(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       next-seo:
         specifier: ^6.1.0
-        version: 6.8.0(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.8.0(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nextjs-progressbar:
         specifier: ^0.0.16
-        version: 0.0.16(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 0.0.16(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
@@ -2143,8 +2143,8 @@ packages:
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
-  '@next/env@15.5.7':
-    resolution: {integrity: sha512-4h6Y2NyEkIEN7Z8YxkA27pq6zTkS09bUSYC0xjd0NpwFxjnIKeZEeH591o5WECSmjpUhLn3H2QLJcDye3Uzcvg==}
+  '@next/env@15.5.9':
+    resolution: {integrity: sha512-4GlTZ+EJM7WaW2HEZcyU317tIQDjkQIyENDLxYJfSWlfqguN+dHkZgyQTV/7ykvobU7yEH5gKvreNrH4B6QgIg==}
 
   '@next/eslint-plugin-next@14.2.33':
     resolution: {integrity: sha512-DQTJFSvlB+9JilwqMKJ3VPByBNGxAGFTfJ7BuFj25cVcbBy7jm88KfUN+dngM4D3+UxZ8ER2ft+WH9JccMvxyg==}
@@ -7521,8 +7521,8 @@ packages:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
 
-  next@15.5.7:
-    resolution: {integrity: sha512-+t2/0jIJ48kUpGKkdlhgkv+zPTEOoXyr60qXe68eB/pl3CMJaLeIGjzp5D6Oqt25hCBiBTt8wEeeAzfJvUKnPQ==}
+  next@15.5.9:
+    resolution: {integrity: sha512-agNLK89seZEtC5zUHwtut0+tNrc0Xw4FT/Dg+B/VLEo9pAcS9rtTKpek3V6kVcVwsB2YlqMaHdfZL4eLEVYuCg==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -11172,7 +11172,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@c15t/backend@1.8.0(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(ws@8.18.3)':
+  '@c15t/backend@1.8.0(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(ws@8.18.3)':
     dependencies:
       '@c15t/logger': 1.0.1
       '@c15t/translations': 1.8.0
@@ -11187,8 +11187,8 @@ snapshots:
       '@orpc/zod': 1.8.1(@opentelemetry/api@1.9.0)(@orpc/contract@1.8.1(@opentelemetry/api@1.9.0))(@orpc/server@1.8.1(@opentelemetry/api@1.9.0)(ws@8.18.3))(ws@8.18.3)(zod@4.1.12)
       base-x: 5.0.1
       defu: 6.1.4
-      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(kysely@0.27.6)(pg@8.11.3)(prisma@5.22.0)
-      fumadb: 0.1.2(drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(kysely@0.27.6)(pg@8.11.3)(prisma@5.22.0))(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
+      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(kysely@0.27.6)(pg@8.16.3)(prisma@5.22.0)
+      fumadb: 0.1.2(drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(kysely@0.27.6)(pg@8.16.3)(prisma@5.22.0))(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
       kysely: 0.27.6
       neverthrow: 8.2.0
       superjson: 2.2.5
@@ -11235,11 +11235,11 @@ snapshots:
       neverthrow: 8.2.0
       picocolors: 1.1.1
 
-  '@c15t/nextjs@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(pg@8.11.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)':
+  '@c15t/nextjs@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(pg@8.16.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)':
     dependencies:
-      '@c15t/react': 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
+      '@c15t/react': 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
       '@c15t/translations': 1.8.0
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
@@ -11283,12 +11283,12 @@ snapshots:
       - use-sync-external-store
       - ws
 
-  '@c15t/react@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)':
+  '@c15t/react@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.4(@types/react@18.2.55)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot': 1.2.0(@types/react@18.2.55)(react@18.3.1)
       '@radix-ui/react-switch': 1.1.4(@types/react@18.2.55)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      c15t: 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
+      c15t: 1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3)
       clsx: 2.1.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -12310,7 +12310,7 @@ snapshots:
       fetch-event-stream: 0.1.6
       qs: 6.14.0
 
-  '@medusajs/link-modules@0.2.12(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/node@20.4.2)(pg@8.16.3)':
+  '@medusajs/link-modules@0.2.12(@mikro-orm/migrations@5.9.7)(@types/node@20.4.2)(pg@8.16.3)':
     dependencies:
       '@medusajs/modules-sdk': 1.12.12(@types/node@20.4.2)
       '@medusajs/types': 1.11.17
@@ -12389,9 +12389,9 @@ snapshots:
       - supports-color
       - tedious
 
-  '@medusajs/medusa-js@6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))))':
+  '@medusajs/medusa-js@6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))))':
     dependencies:
-      '@medusajs/medusa': 1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
+      '@medusajs/medusa': 1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
       axios: 0.24.0
       cross-env: 5.2.1
       qs: 6.14.0
@@ -12400,10 +12400,10 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))':
+  '@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.6(ioredis@5.8.2))(@types/node@20.4.2)(medusa-interfaces@1.3.10)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))':
     dependencies:
       '@medusajs/core-flows': 0.0.10(@types/node@20.4.2)(pg@8.16.3)
-      '@medusajs/link-modules': 0.2.12(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3))(@types/node@20.4.2)(pg@8.16.3)
+      '@medusajs/link-modules': 0.2.12(@mikro-orm/migrations@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
       '@medusajs/medusa-cli': 1.3.23(@types/node@20.4.2)
       '@medusajs/modules-sdk': 1.12.12(@types/node@20.4.2)
       '@medusajs/orchestration': 0.5.8(@types/node@20.4.2)(pg@8.16.3)
@@ -12450,7 +12450,7 @@ snapshots:
       regenerator-runtime: 0.13.11
       request-ip: 3.3.0
       scrypt-kdf: 2.0.1
-      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
+      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
       ulid: 2.4.0
       uuid: 9.0.1
       winston: 3.18.3
@@ -12546,7 +12546,7 @@ snapshots:
     dependencies:
       '@medusajs/types': 1.11.17
       '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7)(@mikro-orm/postgresql@5.9.7)
-      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.11.3)
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
       '@mikro-orm/postgresql': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)
       awilix: 8.0.1
       bignumber.js: 9.3.1
@@ -12613,7 +12613,7 @@ snapshots:
       mikro-orm: 5.9.7
       reflect-metadata: 0.1.13
     optionalDependencies:
-      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.11.3)
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
       '@mikro-orm/postgresql': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)
 
   '@mikro-orm/knex@5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)(pg@8.11.3)':
@@ -12623,19 +12623,33 @@ snapshots:
       knex: 2.5.1(pg@8.11.3)
       sqlstring: 2.3.3
     optionalDependencies:
-      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.11.3)
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
       pg: 8.11.3
     transitivePeerDependencies:
       - pg-native
       - supports-color
       - tedious
 
-  '@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.11.3)':
+  '@mikro-orm/knex@5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)(pg@8.16.3)':
     dependencies:
       '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7)(@mikro-orm/postgresql@5.9.7)
-      '@mikro-orm/knex': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)(pg@8.11.3)
       fs-extra: 11.1.1
-      knex: 2.5.1(pg@8.11.3)
+      knex: 2.5.1(pg@8.16.3)
+      sqlstring: 2.3.3
+    optionalDependencies:
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
+      pg: 8.16.3
+    transitivePeerDependencies:
+      - pg-native
+      - supports-color
+      - tedious
+
+  '@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)':
+    dependencies:
+      '@mikro-orm/core': 5.9.7(@mikro-orm/migrations@5.9.7)(@mikro-orm/postgresql@5.9.7)
+      '@mikro-orm/knex': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)(pg@8.16.3)
+      fs-extra: 11.1.1
+      knex: 2.5.1(pg@8.16.3)
       umzug: 3.3.1(@types/node@20.4.2)
     transitivePeerDependencies:
       - '@mikro-orm/entity-generator'
@@ -12656,7 +12670,7 @@ snapshots:
       '@mikro-orm/knex': 5.9.7(@mikro-orm/core@5.9.7)(@mikro-orm/migrations@5.9.7)(pg@8.11.3)
       pg: 8.11.3
     optionalDependencies:
-      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.11.3)
+      '@mikro-orm/migrations': 5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.4.2)(pg@8.16.3)
     transitivePeerDependencies:
       - better-sqlite3
       - mssql
@@ -12719,7 +12733,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@next/env@15.5.7': {}
+  '@next/env@15.5.9': {}
 
   '@next/eslint-plugin-next@14.2.33':
     dependencies:
@@ -14737,13 +14751,13 @@ snapshots:
     dependencies:
       '@trpc/server': 10.45.1
 
-  '@trpc/next@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/react-query@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.1)(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/next@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/react-query@10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.1)(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/client': 10.45.1(@trpc/server@10.45.1)
       '@trpc/react-query': 10.45.1(@tanstack/react-query@4.42.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.1(@trpc/server@10.45.1))(@trpc/server@10.45.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server': 10.45.1
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -15054,9 +15068,9 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vercel/analytics@1.5.0(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@vercel/analytics@1.5.0(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     optionalDependencies:
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
   '@vercel/oidc@3.0.5': {}
@@ -15620,9 +15634,9 @@ snapshots:
 
   bytes@3.1.2: {}
 
-  c15t@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3):
+  c15t@1.8.1(@opentelemetry/api@1.9.0)(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(@types/react@18.2.55)(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(react@18.3.1)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(use-sync-external-store@1.6.0(react@18.3.1))(ws@8.18.3):
     dependencies:
-      '@c15t/backend': 1.8.0(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(pg@8.11.3)(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(ws@8.18.3)
+      '@c15t/backend': 1.8.0(@opentelemetry/instrumentation@0.203.0(@opentelemetry/api@1.9.0))(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(pg@8.16.3)(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))(ws@8.18.3)
       '@c15t/translations': 1.8.0
       '@orpc/client': 1.8.1(@opentelemetry/api@1.9.0)
       '@orpc/server': 1.8.1(@opentelemetry/api@1.9.0)(ws@8.18.3)
@@ -16357,13 +16371,13 @@ snapshots:
 
   dotenv@17.2.3: {}
 
-  drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(kysely@0.27.6)(pg@8.11.3)(prisma@5.22.0):
+  drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(kysely@0.27.6)(pg@8.16.3)(prisma@5.22.0):
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
       '@prisma/client': 5.22.0(prisma@5.22.0)
-      knex: 2.5.1(pg@8.11.3)
+      knex: 2.5.1(pg@8.16.3)
       kysely: 0.27.6
-      pg: 8.11.3
+      pg: 8.16.3
       prisma: 5.22.0
 
   dunder-proto@1.0.1:
@@ -17228,19 +17242,19 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fumadb@0.1.2(drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(kysely@0.27.6)(pg@8.11.3)(prisma@5.22.0))(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))):
+  fumadb@0.1.2(drizzle-orm@0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(kysely@0.27.6)(pg@8.16.3)(prisma@5.22.0))(prisma@5.22.0)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))):
     dependencies:
       '@clack/prompts': 0.11.0
       '@paralleldrive/cuid2': 2.3.1
       commander: 14.0.2
       kysely: 0.28.8
-      kysely-typeorm: 0.3.0(kysely@0.28.8)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
+      kysely-typeorm: 0.3.0(kysely@0.28.8)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)))
       semver: 7.7.3
       zod: 4.1.12
     optionalDependencies:
-      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.11.3))(kysely@0.27.6)(pg@8.11.3)(prisma@5.22.0)
+      drizzle-orm: 0.44.7(@opentelemetry/api@1.9.0)(@prisma/client@5.22.0(prisma@5.22.0))(knex@2.5.1(pg@8.16.3))(kysely@0.27.6)(pg@8.16.3)(prisma@5.22.0)
       prisma: 5.22.0
-      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
+      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
 
   function-bind@1.1.2: {}
 
@@ -18497,12 +18511,33 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  knex@2.5.1(pg@8.16.3):
+    dependencies:
+      colorette: 2.0.19
+      commander: 10.0.1
+      debug: 4.3.4
+      escalade: 3.2.0
+      esm: 3.2.25
+      get-package-type: 0.1.0
+      getopts: 2.3.0
+      interpret: 2.2.0
+      lodash: 4.17.21
+      pg-connection-string: 2.6.1
+      rechoir: 0.8.0
+      resolve-from: 5.0.0
+      tarn: 3.0.2
+      tildify: 2.0.0
+    optionalDependencies:
+      pg: 8.16.3
+    transitivePeerDependencies:
+      - supports-color
+
   kuler@2.0.0: {}
 
-  kysely-typeorm@0.3.0(kysely@0.28.8)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))):
+  kysely-typeorm@0.3.0(kysely@0.28.8)(typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))):
     dependencies:
       kysely: 0.28.8
-      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
+      typeorm: 0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3))
 
   kysely@0.27.6: {}
 
@@ -19008,13 +19043,13 @@ snapshots:
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu': 4.53.3
 
-  next-auth@4.24.13(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next-auth@4.24.13(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
       '@panva/hkdf': 1.2.1
       cookie: 0.7.2
       jose: 4.15.9
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       oauth: 0.9.15
       openid-client: 5.7.1
       preact: 10.27.2
@@ -19023,7 +19058,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       uuid: 8.3.2
 
-  next-i18next@14.0.3(@types/react@18.2.55)(i18next@23.16.8)(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  next-i18next@14.0.3(@types/react@18.2.55)(i18next@23.16.8)(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-i18next@13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
       '@types/hoist-non-react-statics': 3.3.7(@types/react@18.2.55)
@@ -19031,21 +19066,21 @@ snapshots:
       hoist-non-react-statics: 3.3.2
       i18next: 23.16.8
       i18next-fs-backend: 2.6.1
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-i18next: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
 
-  next-seo@6.8.0(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next-seo@6.8.0(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@next/env': 15.5.7
+      '@next/env': 15.5.9
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001755
       postcss: 8.4.31
@@ -19067,10 +19102,10 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  nextjs-progressbar@0.0.16(next@15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
+  nextjs-progressbar@0.0.16(next@15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1):
     dependencies:
       '@types/nprogress': 0.2.3
-      next: 15.5.7(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.5.9(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 18.3.1
@@ -20937,7 +20972,7 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typeorm@0.3.27(ioredis@5.8.2)(pg@8.11.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)):
+  typeorm@0.3.27(ioredis@5.8.2)(pg@8.16.3)(reflect-metadata@0.1.14)(ts-node@10.9.2(@types/node@20.4.2)(typescript@5.3.3)):
     dependencies:
       '@sqltools/formatter': 1.2.5
       ansis: 3.17.0
@@ -20956,7 +20991,7 @@ snapshots:
       yargs: 17.7.2
     optionalDependencies:
       ioredis: 5.8.2
-      pg: 8.11.3
+      pg: 8.16.3
       ts-node: 10.9.2(@types/node@20.5.1)(typescript@5.3.3)
     transitivePeerDependencies:
       - babel-plugin-macros

@@ -2,7 +2,7 @@ import { Breadcumb } from "@/components/useAllPage";
 import { PrimaryLayout } from "@/layouts";
 import { api } from "@/utils/api";
 import { ReactElement, useState } from "react";
-import { accessToken } from "./info";
+import { accessToken } from "@/context/userContext";
 
 const ChangePassword = () => {
   const [passwords, setPasswords] = useState({

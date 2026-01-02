@@ -1,45 +1,63 @@
-import React, { createContext, useContext, ReactNode } from 'react';
-import { useSession } from 'next-auth/react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { api } from '@/utils/api';
 
-// Định nghĩa kiểu dữ liệu người dùng
 interface UserContextType {
   user: any;
   productsData: any;
+  token: string; // Thêm token vào context để gọi ở HomePage
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-export let accessToken = '';
-if (typeof window !== "undefined") {
-  accessToken = localStorage.getItem("medusa_jwt") ?? '';
-}
-console.log('Access Token from userContext:', accessToken);
-
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  // const { data: session, status } = useSession();
+  const [token, setToken] = useState<string>('');
 
-  // get user info 
-  const { data, isLoading, isError, error } = api.medusa.userDetail.useQuery(
-    { accessToken: accessToken ?? undefined },
+  // 1. Lấy token từ localStorage khi khởi tạo
+  useEffect(() => {
+    const savedToken = localStorage.getItem('medusa_jwt') ?? '';
+    setToken(savedToken);
+  }, []);
+
+  // 2. Gọi API lấy thông tin user
+  const { data: userApiData } = api.medusa.userDetail.useQuery(
+    { accessToken: token || undefined },
     {
-      enabled: !!accessToken,
+      enabled: !!token,
       retry: false,
-    }
-  )
+      refetchInterval: 1000 * 60 * 15, // 15 phút check 1 lần
+    },
+  );
 
-  // get products
   const { data: products } = api.medusa.getProducts.useQuery();
 
+  // // 3. ĐỒNG BỘ VỚI ELECTRON: Mỗi khi token hoặc user thay đổi
+  // useEffect(() => {
+  //   if (token && userApiData) {
+  //     // Gửi token sang Electron để BrowserView không bị log out
+  //     if (window.electronAPI?.updateToken) {
+  //       window.electronAPI.updateToken(token);
+  //     }
+  //   }
+
+  //   // Nếu API trả về lỗi 401 (Unauthorized), xóa token và về login
+  //   // Bạn có thể check error từ useQuery ở đây
+  // }, [token, userApiData]);
+
   const value = {
-    user: data,
+    user: userApiData,
     productsData: products,
+    token: token,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
-// Hook để gọi ở bất cứ đâu
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {

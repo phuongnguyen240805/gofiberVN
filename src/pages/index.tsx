@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import type { NextPageWithLayout } from './_app';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { PrimaryLayout } from '@/layouts';
-import { api } from "@/utils/api";
+import { api } from '@/utils/api';
 import HomePage from '@/components/home';
 export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
   return {
@@ -16,7 +16,6 @@ export const getStaticProps: GetStaticProps = async ({ locale = 'en' }) => {
 const Home: NextPageWithLayout = () => {
   const { data, isLoading } = api.medusa.getProducts.useQuery();
   const { data: collection } = api.medusa.listCampaigns.useQuery();
-  console.log("Collection Data:", collection);
   return (
     <>
       <HomePage />

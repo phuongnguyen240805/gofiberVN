@@ -41,7 +41,7 @@ const ProductDetail = () => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const router = useRouter();
-  const { id } = useParams();
+  const { id } = router.query;
   const { data: productDetail } = api.medusa.getProduct.useQuery({
     id: id as string,
   });

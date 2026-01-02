@@ -221,7 +221,7 @@ const ComponentFirst = () => {
                         </TableBody>
                       </Table>
                       <div className="p-2">
-                        <Link href={`service/product/${product?.id}`}>
+                        <Link href={product?.id ? `/account/service/product/${product.id}` : "#"}>
                           <Button className="w-full rounded-xl border border-blue-500 bg-white p-4 text-blue-500 hover:bg-blue-500 hover:text-white">
                             <MdOutlineShoppingCart /> Setup
                           </Button>

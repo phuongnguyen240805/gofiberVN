@@ -1,5 +1,5 @@
 import { Breadcumb } from '@/components/useAllPage';
-import { accessToken, useUser } from '@/context/userContext';
+import { useUser } from '@/context/userContext';
 import { PrimaryLayout } from '@/layouts';
 import { api } from '@/utils/api';
 import { ReactElement, useEffect, useState } from 'react';
@@ -26,6 +26,7 @@ const InfoUSer = () => {
   });
 
   const [twoFactorAuth, setTwoFactorAuth] = useState(false);
+  const { user, token } = useUser();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => {
@@ -55,10 +56,10 @@ const InfoUSer = () => {
   });
 
   const handleSave = async () => {
-    if (!accessToken) return;
+    if (!token) return;
 
     const payload = {
-      accessToken: accessToken,
+      accessToken: token,
       first_name: formData.first_name,
       last_name: formData.last_name,
       phone: formData.phone || '',
@@ -75,8 +76,6 @@ const InfoUSer = () => {
     // 2. Thực hiện gọi API
     updateMutation.mutate(payload);
   };
-
-  const { user } = useUser();
 
   useEffect(() => {
     setFormData(user);

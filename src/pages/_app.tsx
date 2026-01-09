@@ -14,6 +14,7 @@ import SEO from '../../next-seo.config';
 import 'aos/dist/aos.css';
 import '@/styles/globals.css';
 import { UserProvider } from '@/context/userContext';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -34,6 +35,18 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       once: true,
     });
   }, []);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = document.cookie.split('; ').find(row => row.startsWith('medusa_jwt='));
+    const tokenStored = localStorage.getItem('medusa_jwt');
+    // const isPublicPage = ['/auth/login', '/auth/register'].includes(router.pathname);
+
+    if (!token || !tokenStored) {
+      router.push('/auth/login');
+    }
+  }, [router.pathname]);
 
   return (
     <main className={`${inter.variable} font-sans`}>

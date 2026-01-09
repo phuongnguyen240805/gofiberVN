@@ -87,6 +87,56 @@ const items = [
         title: 'Domain',
         url: '/account/service/?component=10',
       },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Giải trí',
+        url: '/account/service/?component=11',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Làm việc',
+        url: '/account/service/?component=12',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Học tập',
+        url: '/account/service/?component=13',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'eSIM du lịch',
+        url: '/account/service/?component=14',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Edit Ảnh - Video',
+        url: '/account/service/?component=15',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Window Office',
+        url: '/account/service/?component=16',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Google Drive',
+        url: '/account/service/?component=17',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Thế Giới AI',
+        url: '/account/service/?component=18',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'VPN, bảo mật mạng',
+        url: '/account/service/?component=19',
+      },
+      {
+        icon: IoMdCloudOutline,
+        title: 'Gift Card',
+        url: '/account/service/?component=20',
+      },
     ],
     icon: PiTrademarkRegistered,
   },
@@ -197,11 +247,10 @@ export function AppSidebar() {
     <>
       {/* Sidebar Container */}
       <div
-        className={`scrollbar-hide z-[48] flex h-screen transition-all duration-300 ease-in-out lg:relative lg:w-auto lg:bg-transparent ${
-          openMobile
+        className={`scrollbar-hide z-[48] flex h-screen transition-all duration-300 ease-in-out lg:relative lg:w-auto lg:bg-transparent ${openMobile
             ? 'bg-overlay/30 fixed left-0 top-0 w-full backdrop-blur-md'
             : 'bg-overlay/30 fixed left-[-100%] top-0 w-full backdrop-blur-md lg:left-0'
-        }`}
+          }`}
       >
         <div className="flex border-r border-gray-200 lg:border-[#e5e7eb]">
           <div
@@ -266,11 +315,10 @@ export function AppSidebar() {
                       {items.map((item, index) => (
                         <SidebarMenuItem
                           key={item.title}
-                          className={`border-l-3 flex w-full cursor-pointer flex-col items-center justify-center gap-1.5 px-1 py-2.5 transition-colors ${
-                            activeItem === index
+                          className={`border-l-3 flex w-full cursor-pointer flex-col items-center justify-center gap-1.5 px-1 py-2.5 transition-colors ${activeItem === index
                               ? 'border-blue-700 bg-blue-100 text-blue-700'
                               : 'border-transparent text-gray-600 hover:bg-gray-100 lg:hover:border-gray-400 lg:hover:bg-gray-100/10 lg:hover:text-gray-600'
-                          }`}
+                            }`}
                           onClick={() => {
                             setActiveItem(index);
                             if (item.child) {
@@ -287,11 +335,10 @@ export function AppSidebar() {
                           >
                             {item.child ? (
                               <button
-                                className={`flex h-full w-full flex-col items-center justify-center gap-1.5 bg-transparent text-center text-[11px] hover:bg-transparent ${
-                                  activeItem === index
+                                className={`flex h-full w-full flex-col items-center justify-center gap-1.5 bg-transparent text-center text-[11px] hover:bg-transparent ${activeItem === index
                                     ? 'text-blue-700'
                                     : 'text-gray-600'
-                                }`}
+                                  }`}
                               >
                                 <item.icon className="!h-6 !w-6" />
                                 {item.title}
@@ -299,11 +346,10 @@ export function AppSidebar() {
                             ) : (
                               <Link
                                 href={item.url}
-                                className={`flex h-full flex-col items-center justify-center gap-1.5 text-center text-[11px] ${
-                                  activeItem === index
+                                className={`flex h-full flex-col items-center justify-center gap-1.5 text-center text-[11px] ${activeItem === index
                                     ? 'text-blue-700'
                                     : 'text-gray-600'
-                                }`}
+                                  }`}
                                 onClick={() => setOpenMobile(false)}
                               >
                                 <item.icon className="!h-6 !w-6" />

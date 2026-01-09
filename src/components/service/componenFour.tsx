@@ -4,6 +4,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useEffect, useMemo, useState } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useUser } from '@/context/userContext';
+import { api } from '@/utils/api';
+import { useRouter } from 'next/router';
+import { useOrderStore } from '@/store/useOrderStore';
 
 export const paymentMethods = [
   {
@@ -34,6 +37,13 @@ const ComponentFour = () => {
   const [selectedPayment, setSelectedPayment] = useState(0);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { productsData } = useUser();
+
+  const router = useRouter();
+  const setOrderData = useOrderStore((state) => state.setOrderData);
+  const { id } = router.query;
+  const { data: productDetail } = api.medusa.getProduct.useQuery({
+    id: id as string,
+  });
 
   const cycles = [
     { label: 'Price per month', key: 'month', value: 1 },
@@ -109,6 +119,83 @@ const ComponentFour = () => {
   const vat = subtotal * 0.1;
   const total = subtotal + vat;
 
+  const createCart = api.medusa.createCart.useMutation();
+  const addToCart = api.medusa.addToCart.useMutation();
+  const completeOrder = api.medusa.completeOrder.useMutation();
+  const getRegions = api.medusa.getRegions.useQuery(); // Thay thế bằng ID vùng thực tế
+  console.log('getRegions', getRegions.data?.[0]?.id);
+
+  const handleInitOrder = async () => {
+    if (!agreedToTerms) return;
+
+    // 1. Xác định đúng sản phẩm (Product) từ danh sách hosting đã filter
+    const selectedHostingProduct = pricingPlans[selectedPlan];
+    if (!selectedHostingProduct) {
+      alert("Please select a hosting plan first.");
+      return;
+    }
+
+    // 2. Tìm Product gốc từ productsData để lấy danh sách Variants
+    const originalProduct = productsData.find(p => p.id === selectedHostingProduct.id);
+
+    // 3. Tìm Variant khớp với chu kỳ (Cycle) đang chọn
+    const currentCycleKey = cycles[selectedCycle].key; // 'month', '3 months', etc.
+    const selectedVariant = originalProduct?.variants?.find((v: any) => {
+      const title = v.title.toLowerCase();
+      if (currentCycleKey === 'month') return title.includes('1 month') || title.includes('1 tháng');
+      if (currentCycleKey === '3 months') return title.includes('3 month') || title.includes('3 tháng');
+      if (currentCycleKey === '6 months') return title.includes('6 month') || title.includes('6 tháng');
+      if (currentCycleKey === 'year') return title.includes('12 month') || title.includes('1 năm');
+      return false;
+    });
+
+    if (!selectedVariant) {
+      alert("This plan does not support the selected billing cycle.");
+      return;
+    }
+
+    try {
+      let cartId = localStorage.getItem("cart_id");
+
+      // Tạo giỏ hàng nếu chưa có
+      if (!cartId) {
+        const { cart } = await createCart.mutateAsync({
+          id: getRegions.data?.[0]?.id || ''
+        });
+        cartId = cart.id;
+        localStorage.setItem("cart_id", cartId);
+      }
+
+      // Thêm vào giỏ hàng với trạng thái unpaid trong metadata
+      await addToCart.mutateAsync({
+        cart_id: cartId,
+        variant_id: selectedVariant.id,
+        quantity: 1,
+        metadata: {
+          status: 'unpaid',
+          domain: domain,
+          payment_cycle: currentCycleKey
+        }
+      });
+
+      console.log('cart_id: ', cartId)
+      const {success, order, message} = await completeOrder.mutateAsync({ cart_id: cartId });
+      console.log('success: ', success, 'product order: ', order)
+
+      setOrderData({
+        id: cartId,
+        name: selectedHostingProduct.name,
+        time: cycles[selectedCycle].label,
+        total: total.toFixed(2)
+      });
+
+      router.push('/order');
+    } catch (error) {
+      console.error('Order error:', error);
+      alert('Failed to initialize order. Please try again.');
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Header */}
@@ -129,11 +216,10 @@ const ComponentFour = () => {
                   <div key={index} className="flex-1">
                     <button
                       onClick={() => setSelectedCycle(index)}
-                      className={`flex w-full items-center justify-center gap-2 !rounded-xl px-4 py-2 text-sm font-medium xl:!rounded-full ${
-                        selectedCycle === index
-                          ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
-                          : 'text-gray-700'
-                      }`}
+                      className={`flex w-full items-center justify-center gap-2 !rounded-xl px-4 py-2 text-sm font-medium xl:!rounded-full ${selectedCycle === index
+                        ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white'
+                        : 'text-gray-700'
+                        }`}
                     >
                       {cycle.label}
                     </button>
@@ -163,17 +249,15 @@ const ComponentFour = () => {
                   {pricingPlans.map((plan, index) => (
                     <div
                       key={index}
-                      className={`cols-span-1 relative flex flex-col gap-0 rounded-xl pb-4 shadow-sm ${
-                        plan.isGray ? 'bg-gray-50' : 'bg-primary/5'
-                      }`}
+                      className={`cols-span-1 relative flex flex-col gap-0 rounded-xl pb-4 shadow-sm ${plan.isGray ? 'bg-gray-50' : 'bg-primary/5'
+                        }`}
                     >
                       {/* Header */}
                       <div
-                        className={`flex flex-col rounded-t-xl px-4 py-2 text-lg font-semibold text-white ${
-                          plan.isGray
-                            ? 'bg-gradient-to-r from-gray-400 to-gray-400'
-                            : 'bg-gradient-to-r from-cyan-500 to-blue-500'
-                        }`}
+                        className={`flex flex-col rounded-t-xl px-4 py-2 text-lg font-semibold text-white ${plan.isGray
+                          ? 'bg-gradient-to-r from-gray-400 to-gray-400'
+                          : 'bg-gradient-to-r from-cyan-500 to-blue-500'
+                          }`}
                       >
                         <div className="flex flex-wrap gap-5">
                           <h3 className="text-md font-semibold uppercase max-lg:text-lg">
@@ -204,13 +288,12 @@ const ComponentFour = () => {
                           </p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray &&
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray &&
                             (plan.storage === 'Unlimited' ||
                               parseInt(plan.storage) >= 20)
-                              ? 'text-primary'
-                              : 'text-gray-500'
-                          }`}
+                            ? 'text-primary'
+                            : 'text-gray-500'
+                            }`}
                         >
                           {plan.storage}
                         </p>
@@ -219,13 +302,12 @@ const ComponentFour = () => {
                           <p className="text-textSecondary text-sm">Ram</p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray &&
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray &&
                             (plan.ram === 'Unlimited' ||
                               parseInt(plan.ram) >= 2)
-                              ? 'text-primary'
-                              : 'text-gray-500'
-                          }`}
+                            ? 'text-primary'
+                            : 'text-gray-500'
+                            }`}
                         >
                           {plan.ram}
                         </p>
@@ -234,11 +316,10 @@ const ComponentFour = () => {
                           <p className="text-textSecondary text-sm">CPU</p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray && plan.cpu.toString().includes('2')
-                              ? 'text-primary'
-                              : 'text-gray-500'
-                          }`}
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray && plan.cpu.toString().includes('2')
+                            ? 'text-primary'
+                            : 'text-gray-500'
+                            }`}
                         >
                           {plan.cpu} Full CPU
                         </p>
@@ -247,11 +328,10 @@ const ComponentFour = () => {
                           <p className="text-textSecondary text-sm">INodes</p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray && parseInt(plan.inodes) >= 250000
-                              ? 'text-primary'
-                              : 'text-gray-500'
-                          }`}
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray && parseInt(plan.inodes) >= 250000
+                            ? 'text-primary'
+                            : 'text-gray-500'
+                            }`}
                         >
                           {plan.inodes}
                         </p>
@@ -260,13 +340,12 @@ const ComponentFour = () => {
                           <p className="text-textSecondary text-sm">Domain</p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray &&
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray &&
                             (plan.domain === 'Unlimited' ||
                               parseInt(plan.domain) > 1)
-                              ? 'text-primary'
-                              : 'text-gray-500'
-                          }`}
+                            ? 'text-primary'
+                            : 'text-gray-500'
+                            }`}
                         >
                           {plan.domain}
                         </p>
@@ -277,9 +356,8 @@ const ComponentFour = () => {
                           </p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray ? 'text-primary' : 'text-gray-500'
-                          }`}
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray ? 'text-primary' : 'text-gray-500'
+                            }`}
                         >
                           {plan.tkTrenServer}
                         </p>
@@ -290,9 +368,8 @@ const ComponentFour = () => {
                           </p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray ? 'text-primary' : 'text-gray-500'
-                          }`}
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray ? 'text-primary' : 'text-gray-500'
+                            }`}
                         >
                           {plan.mysqlConnect}
                         </p>
@@ -301,9 +378,8 @@ const ComponentFour = () => {
                           <p className="text-textSecondary text-sm">IPV4</p>
                         </div>
                         <p
-                          className={`col-span-6 text-sm font-semibold ${
-                            !plan.isGray ? 'text-primary' : 'text-gray-500'
-                          }`}
+                          className={`col-span-6 text-sm font-semibold ${!plan.isGray ? 'text-primary' : 'text-gray-500'
+                            }`}
                         >
                           {plan.ipv4}
                         </p>
@@ -457,11 +533,10 @@ const ComponentFour = () => {
                       onClick={() =>
                         !method.disabled && setSelectedPayment(index)
                       }
-                      className={`relative flex select-none items-center gap-2 overflow-hidden rounded-lg border bg-white p-4 ${
-                        method.disabled
-                          ? 'cursor-no-drop opacity-40'
-                          : 'cursor-pointer'
-                      }`}
+                      className={`relative flex select-none items-center gap-2 overflow-hidden rounded-lg border bg-white p-4 ${method.disabled
+                        ? 'cursor-no-drop opacity-40'
+                        : 'cursor-pointer'
+                        }`}
                     >
                       <img
                         src={method.img}
@@ -563,7 +638,7 @@ const ComponentFour = () => {
                     </div>
                     <div className="border-b-1 flex w-full items-center justify-between border-[#e5e7eb] pb-2">
                       <div className="text-textSecondary text-sm">Cycle</div>
-                      <div className="text-sm font-semibold">1 Month</div>
+                      <div className="text-sm font-semibold">{cycles[selectedCycle].label}</div>
                     </div>
                     <div className="border-b-1 flex w-full items-center justify-between border-[#e5e7eb] pb-2">
                       <div className="text-textSecondary text-sm">Subtotal</div>
@@ -589,6 +664,7 @@ const ComponentFour = () => {
 
                 <div className="mt-4 flex flex-col gap-4">
                   <Button
+                    onClick={handleInitOrder}
                     disabled={!agreedToTerms}
                     className="my-auto !rounded-lg bg-white text-blue-600 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                   >

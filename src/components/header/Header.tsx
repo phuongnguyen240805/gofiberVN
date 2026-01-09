@@ -20,14 +20,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { useRouter } from 'next/navigation';
+
+
 export const Header = () => {
   const tabs = ["Not read", "Read", "All"];
   const [tabActive, setTabActive] = useState(tabs[0]);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
+  const router = useRouter();
 
   const serviceItems = [
     { title: "Cloud VPS", url: "/account/services?component=1" },
@@ -39,19 +41,27 @@ export const Header = () => {
     { title: "Load Balancer Digital Ocean", url: "/account/services?component=7" },
   ];
 
-  const getToken = () => {
-    if (typeof window !== "undefined") {
-      return sessionStorage.getItem("authToken") ?? localStorage.getItem("authToken") ?? undefined;
-    }
-    return undefined;
+  const getCookie = (name: string) => {
+    if (typeof window === "undefined") return undefined;
+
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift();
+    return null;
   };
 
-  // Trong component
-  const accessToken = getToken();
-  const { data: user } = api.medusa.userDetail.useQuery(
-    { accessToken: accessToken?.toString() }, // ← truyền chuỗi, không phải object
-    { enabled: !!accessToken }
+  const handleUserAvatar = (firstName: string) => {
+    if (firstName) return firstName.charAt(0).toUpperCase();
+
+    return 'U';
+  }
+
+  const cookieToken = getCookie('medusa_jwt')?.toString();
+  const { data: userData } = api.medusa.userDetail.useQuery(
+    { accessToken: cookieToken },
+    { enabled: !!cookieToken }
   );
+  const avatarName = userData?.first_name
 
   return (
     <section className="z-[46] sticky top-0 flex w-full flex-col items-center justify-between gap-3 bg-white px-3 py-3 shadow-lg lg:flex-row lg:px-10 lg:py-2">
@@ -64,6 +74,7 @@ export const Header = () => {
 
         {/* Recharge Button */}
         <Button
+          onClick={() => { router.push('/account/add-funds') }}
           variant="ghost"
           className="max-sm:first:flex-1 max-sm:first:px-2 max-sm:last:hidden group rounded-md px-2 bg-blue-500/20 text-blue-600 hover:bg-blue-500 hover:text-white lg:px-4 min-w-20 h-10 text-small gap-2"
         >
@@ -164,7 +175,7 @@ export const Header = () => {
                 <DropdownMenuTrigger className="!px-0">
                   <span className="flex gap-2 font-bold">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/20 font-medium text-blue-600">
-                      D
+                      {handleUserAvatar(avatarName)}
                     </div>
                   </span>
                 </DropdownMenuTrigger>
@@ -175,6 +186,11 @@ export const Header = () => {
                   <DropdownMenuItem>Billing</DropdownMenuItem>
                   <DropdownMenuItem>Team</DropdownMenuItem>
                   <DropdownMenuItem>Subscription</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href='auth/login'>
+                      Logout
+                    </Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

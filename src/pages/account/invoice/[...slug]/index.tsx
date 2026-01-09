@@ -1,8 +1,15 @@
 import { Breadcumb } from "@/components/useAllPage";
 import { PrimaryLayout } from "@/layouts";
-import { useParams, usePathname } from "next/navigation";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import { api } from "@/utils/api";
+import { formatDate } from "@/utils/date-helper";
+import { StoreCartLineItem } from "@medusajs/types";
+
+interface InvoiceMetadata {
+  status?: 'paid' | 'unpaid' | 'cancelled';
+  [key: string]: any;
+}
 
 const InvoicesPage = () => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'paid' | 'unpaid' | 'cancelled'>('all');
@@ -10,8 +17,12 @@ const InvoicesPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [selectedInvoices, setSelectedInvoices] = useState<string[]>([]);
   const [showFilterModal, setShowFilterModal] = useState(false);
-  // const { slug } = useParams()
+  const [currentPage, setCurrentPage] = useState(1);
+  const isFixing = useRef(false);
+  const utils = api.useContext();
   const router = useRouter(); // => dung cho page routes
+  // const { slug } = useParams()
+
   const { slug } = router.query;
   console.log('slug', slug);
   let title = ''
@@ -24,6 +35,57 @@ const InvoicesPage = () => {
   else if (slug?.toString() === 'domain-invoices') {
     title = 'My Purchased Domain Invoices'
   }
+  const cartId = typeof window !== 'undefined' ? localStorage.getItem("cart_id") : null;
+
+  const { data: cart, isLoading } = api.medusa.getCart.useQuery(
+    { id: cartId as string },
+    { enabled: !!cartId } // Chỉ chạy khi có cartId
+  );
+
+  const cartItems: StoreCartLineItem[] = cart?.cart.items || [];
+
+  const updateMetadataMutation = api.medusa.updateLineItemMetadata.useMutation();
+
+  useEffect(() => {
+    const fixMetadata = async () => {
+      if (!cartId || !cartItems.length || isFixing.current) return;
+
+      const itemsToUpdate = cartItems.filter(item => !item.metadata?.status);
+      if (itemsToUpdate.length === 0) return;
+
+      isFixing.current = true; // Chặn không cho effect chạy lại chồng chéo
+
+      for (const item of itemsToUpdate) {
+        await updateMetadataMutation.mutateAsync({
+          cart_id: cartId,
+          line_item_id: item.id,
+          metadata: { ...item.metadata, status: "unpaid" },
+        });
+      }
+
+      // Cập nhật lại cache để UI nhận status mới
+      await utils.medusa.getCart.invalidate({ id: cartId })
+      isFixing.current = false;
+    };
+
+    fixMetadata();
+  }, [cartItems, cartId]);
+
+  const { paginatedInvoices, totalPages } = useMemo(() => {
+    const filtered = cartItems.filter((item) => {
+      const status = item.metadata?.status || 'unpaid';
+      const matchesFilter = selectedFilter === 'all' || status === selectedFilter;
+      const matchesSearch = item.title.toLowerCase().includes(searchValue.toLowerCase());
+      return matchesFilter && matchesSearch;
+    });
+
+    const start = (currentPage - 1) * itemsPerPage;
+    return {
+      paginatedInvoices: filtered.slice(start, start + itemsPerPage),
+      totalPages: Math.ceil(filtered.length / itemsPerPage)
+    };
+  }, [cartItems, selectedFilter, searchValue, itemsPerPage, currentPage]);
+
   return (
     <div className="w-full flex flex-col gap-6">
       <Breadcumb title={title} />
@@ -183,22 +245,54 @@ const InvoicesPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td colSpan={6} className="h-40 border-none text-center">
-                      <div className="flex flex-col items-center justify-center gap-4 pt-[60px] text-sm text-black/25">
-                        <svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
-                          <g transform="translate(0 1)" fill="none" fillRule="evenodd">
-                            <ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse>
-                            <g fillRule="nonzero" stroke="#d9d9d9">
-                              <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
-                              <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#fafafa"></path>
-                            </g>
-                          </g>
-                        </svg>
-                        No data
-                      </div>
-                    </td>
-                  </tr>
+                  {paginatedInvoices.length > 0 ? (
+                    paginatedInvoices.map((item, index) => {
+                      const metadata = item.metadata as InvoiceMetadata
+                      const status = metadata.status
+
+                      return (
+                        <tr key={item.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
+                          <td className="py-4 text-center">
+                            <input type="checkbox" className="h-4 w-4 rounded border-gray-300" />
+                          </td>
+                          {/* Invoice # - Hiển thị ID sản phẩm hoặc ID giỏ hàng */}
+                          <td className="py-4 text-center text-blue-500 font-medium">
+                            #{item.id.slice(-5).toUpperCase()}
+                          </td>
+                          {/* Invoice Date - Lấy ngày tạo item */}
+                          <td className="py-4 text-center text-gray-600">
+                            {formatDate(item.created_at)}
+                          </td>
+                          {/* Due Date - Giả định 7 ngày sau */}
+                          <td className="py-4 text-center text-gray-600">
+                            {formatDate(item.created_at)}
+                          </td>
+                          {/* Total - Medusa lưu số nguyên nên chia 100 */}
+                          <td className="py-4 text-center font-semibold text-gray-900">
+                            {(item.unit_price).toFixed(2)} $
+                          </td>
+                          {/* Status Badge */}
+                          <td className="py-4 text-center">
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider
+                                 ${item.metadata?.status === 'paid' ? 'bg-green-100 text-green-600' :
+                                item.metadata?.status === 'cancelled' ? 'bg-red-100 text-red-600' :
+                                  'bg-orange-100 text-orange-600'}`}>
+                              {status}
+                            </span>
+                          </td>
+                        </tr>
+                      )
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={6} className="h-40 text-center">
+                        {/* Giữ nguyên phần SVG No Data của bạn ở đây */}
+                        <div className="flex flex-col items-center justify-center gap-2 opacity-30">
+                          <p>No matching records found</p>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -207,7 +301,7 @@ const InvoicesPage = () => {
           {/* Pagination */}
           <div className="flex w-full flex-col-reverse items-center justify-between gap-4 lg:flex-row">
             <div className="flex w-full items-center justify-between lg:flex-1">
-              <p className="text-sm text-gray-600">There are 0 records in total.</p>
+              <p className="text-sm text-gray-600">There are {totalPages} records in total.</p>
 
               <div className="relative">
                 <select

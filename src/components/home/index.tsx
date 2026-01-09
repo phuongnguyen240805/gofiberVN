@@ -1,5 +1,5 @@
 import { Breadcumb } from '../useAllPage';
-import { BiSolidPackage } from 'react-icons/bi';
+import { BiSolidPackage, BiTimeFive } from 'react-icons/bi';
 import { TiMessages } from 'react-icons/ti';
 import { FaRegCreditCard } from 'react-icons/fa';
 import Image from 'next/image';
@@ -17,29 +17,30 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useUser } from '@/context/userContext';
 import { fi } from 'zod/v4/locales';
 import Link from 'next/link';
-const items = [
-  {
-    Amount: 0,
-    Label: 'Services',
-    Icon: BiSolidPackage,
-    color: 'bg-[#EF5350]',
-    link: 'account/service/?component=1&tab=1',
-  },
-  {
-    Amount: 0,
-    Label: 'Tickets',
-    Icon: TiMessages,
-    color: 'bg-[#3CB7EE]',
-    link: 'account/support/my-tickets',
-  },
-  {
-    Amount: 0,
-    Label: 'Services',
-    Icon: FaRegCreditCard,
-    color: 'bg-[#FFAB40]',
-    link: 'account/invoice/invoices/',
-  },
-];
+import { api } from '@/utils/api';
+// const items = [
+//   {
+//     Amount: 0,
+//     Label: 'Services',
+//     Icon: BiSolidPackage,
+//     color: 'bg-[#EF5350]',
+//     link: 'account/service/?component=1&tab=1',
+//   },
+//   {
+//     Amount: 0,
+//     Label: 'Tickets',
+//     Icon: TiMessages,
+//     color: 'bg-[#3CB7EE]',
+//     link: 'account/support/my-tickets',
+//   },
+//   {
+//     Amount: 0,
+//     Label: 'Services',
+//     Icon: FaRegCreditCard,
+//     color: 'bg-[#FFAB40]',
+//     link: 'account/invoice/invoices/',
+//   },
+// ];
 const supplier = [
   {
     name: 'GoDaddy',
@@ -104,27 +105,56 @@ const supplier = [
     ],
   },
 ];
-const service = [
-  {
-    icon: BiSolidPackage,
-    label: 'Your Active Products/Services',
-    des: 'It appears you do not have any products/services with us yet.',
-  },
-  {
-    icon: BiSolidPackage,
-    label: 'Your Active Products/Services',
-    des: 'It appears you do not have any products/services with us yet.',
-  },
-];
+
+//   {
+//     icon: BiSolidPackage,
+//     label: 'Your Active Products/Services',
+//     des: 'It appears you do not have any products/services with us yet.',
+//   },
+//   {
+//     icon: BiSolidPackage,
+//     label: 'Your Active Products/Services',
+//     des: 'It appears you do not have any products/services with us yet.',
+//   },
+// ];
+
 const HomePage = () => {
   const [supplierActive, setSupplierActive] = useState(supplier[0].name);
-  const [userInfo, setUserInfo] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-  });
   const { user } = useUser();
-  console.log('User info in HomePage:', userInfo);
+  const [userInfo, setUserInfo] = useState(user);
+  const cartId = typeof window !== 'undefined' ? localStorage.getItem('cart_id') : null;
+
+  // Gọi API (Giả sử bạn đã định nghĩa các router này trong backend)
+  const { data: cart } = api.medusa.getCart.useQuery({ id: cartId || "" }, { enabled: !!cartId });
+
+  // Đếm số lượng sản phẩm trong giỏ hàng
+  const cartItemsCount = cart?.cart?.items?.length || 0;
+
+  const statsItems = [
+    {
+      Amount: cartItemsCount,
+      Label: 'Services in Cart',
+      Icon: BiSolidPackage,
+      color: 'bg-[#EF5350]',
+      link: '/cart',
+    },
+    {
+      Amount: 0,
+      Label: 'Tickets',
+      Icon: TiMessages,
+      color: 'bg-[#3CB7EE]',
+      link: 'account/support/my-tickets',
+    },
+    {
+      Amount: cartItemsCount,
+      Label: 'Invoices',
+      Icon: FaRegCreditCard,
+      color: 'bg-[#FFAB40]',
+      link: 'account/invoice/invoices/',
+    },
+  ];
+
+  const hasTickets = false;
 
   useEffect(() => {
     setUserInfo(user);
@@ -176,7 +206,7 @@ const HomePage = () => {
 
       {/* Stats Cards */}
       <div className="flex w-full flex-col items-center justify-between gap-3 md:flex-row">
-        {items.map((item, index) => {
+        {statsItems.map((item, index) => {
           const Icon = item.Icon;
           return (
             <a
@@ -199,7 +229,6 @@ const HomePage = () => {
       </div>
 
       {/* Domain Service Section */}
-      {/* Domain Service Section */}
       <div className="rounded-2xl bg-gradient-to-br from-cyan-400 to-blue-600 p-5 px-2 shadow-xl sm:px-5">
         <div className="mx-auto max-w-[1024px]">
           <h2 className="mb-4 text-center text-xl font-semibold uppercase text-white">
@@ -212,11 +241,10 @@ const HomePage = () => {
               <div
                 key={index}
                 onClick={() => setSupplierActive(sup.name)}
-                className={`my-3 flex w-[50%] cursor-pointer rounded-2xl border bg-gradient-to-br p-4 shadow-sm backdrop-blur-md transition-all ${
-                  supplierActive === sup.name
-                    ? 'border-white/80 from-white/20 to-white/60'
-                    : 'border-white/40 from-white/10 to-white/40'
-                }`}
+                className={`my-3 flex w-[50%] cursor-pointer rounded-2xl border bg-gradient-to-br p-4 shadow-sm backdrop-blur-md transition-all ${supplierActive === sup.name
+                  ? 'border-white/80 from-white/20 to-white/60'
+                  : 'border-white/40 from-white/10 to-white/40'
+                  }`}
               >
                 <Image
                   src={sup.logo}
@@ -288,26 +316,66 @@ const HomePage = () => {
       </div>
 
       {/* Service Information Cards */}
-      <div className="flex flex-col items-stretch justify-between gap-4 md:flex-row">
-        {service.map((serv, index) => {
-          const Icon = serv.icon;
-          return (
-            <div
-              key={index}
-              className="w-full rounded-2xl bg-white p-5 shadow-sm md:max-w-[calc(50%-8px)]"
-            >
-              <div className="mb-2 flex items-center gap-2">
-                <Icon size={20} />
-                <h3 className="text-md font-semibold lg:text-lg">
-                  {serv.label}
-                </h3>
-              </div>
-              <div className="tracking-wide">
-                <p className="text-gray-600">{serv.des}</p>
-              </div>
+      <div className="flex w-full flex-col gap-6 p-2 min-h-screen text-slate-200 font-sans">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          {/* CỘT TRÁI: ACTIVE SERVICES (Lấy từ Cart) */}
+          <div className="flex flex-col gap-4 bg-[#0f111a] p-4 rounded-lg">
+            <div className="flex items-center gap-2 px-1">
+              <BiSolidPackage className="text-slate-400" size={20} />
+              <h3 className="font-semibold uppercase tracking-wider text-sm">activeService.title</h3>
             </div>
-          );
-        })}
+
+            <div className="flex flex-col gap-3 overflow-y-auto max-h-[600px] pr-2 custom-scrollbar">
+              {cart?.cart?.items && cart?.cart.items.length > 0 ? (
+                cart?.cart.items.map((item, idx) => {
+                  return (
+                    <div
+                      key={idx}
+                      className="bg-[#161b22] border border-white/5 p-4 rounded-xl flex justify-between items-start hover:border-white/10 transition-all shadow-sm"
+                    >
+                      <div className="flex flex-col gap-1">
+                        <span className="font-bold text-[15px] text-slate-100">{item.title}</span>
+                        <div className="flex items-center gap-1 text-[11px] text-slate-500">
+                          <BiTimeFive size={14} />
+                          <span>activeService.latestUpdate: {new Date().toLocaleTimeString('vi-VN')} 06/01/2026</span>
+                        </div>
+                      </div>
+                      {/* Badge trạng thái giống ảnh image_5da5c0.png */}
+                      <span className="bg-[#f59e0b1a] text-[#f59e0b] text-[10px] px-3 py-1 rounded-full font-bold uppercase border border-[#f59e0b33]">
+                        {item?.metadata?.status === 'unpaid' ? 'pending' : 'undefinded'}
+                      </span>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="bg-[#161b22] border border-dashed border-white/10 p-10 rounded-xl text-center">
+                  <p className="text-slate-500 text-sm italic">Empty active service</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* CỘT PHẢI: RECENT TICKETS */}
+          <div className="flex flex-col gap-4 bg-[#0f111a] p-4 rounded-lg">
+            <div className="flex items-center gap-2 px-1">
+              <TiMessages className="text-slate-400" size={20} />
+              <h3 className="font-semibold uppercase tracking-wider text-sm">recentTickets.title</h3>
+            </div>
+
+            <div className="bg-[#161b22] border border-white/5 rounded-xl p-8 flex flex-col items-start shadow-sm">
+              {!hasTickets ? (
+                <p className="text-slate-400 text-sm font-medium h-fit">
+                  Empty Active Tickets
+                </p>
+              ) : (
+                <div className="text-sm text-blue-400 hover:underline cursor-pointer">
+                  View your active tickets...
+                </div>
+              )}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

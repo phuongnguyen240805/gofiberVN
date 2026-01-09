@@ -17,6 +17,7 @@ import { paymentMethods } from '@/components/service/componenFour';
 import { FiMonitor } from 'react-icons/fi';
 import { LucideChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { useOrderStore } from '@/store/useOrderStore';
 
 // Cấu hình chiết khấu theo chu kỳ thanh toán
 const CYCLE_CONFIG: Record<string, { months: number; discount: number }> = {
@@ -41,11 +42,11 @@ const ProductDetail = () => {
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const router = useRouter();
+  const setOrderData = useOrderStore((state) => state.setOrderData);
   const { id } = router.query;
   const { data: productDetail } = api.medusa.getProduct.useQuery({
     id: id as string,
   });
-  console.log('Product Detail:', productDetail);
 
   const { cycle, basePrice, adjustedPrice, vat, total, specs, variantName } =
     useMemo(() => {
@@ -79,7 +80,7 @@ const ProductDetail = () => {
         total: calcAdjusted + tax,
         variantName: productDetail.title,
         specs: {
-          cloud: String(metadata.cloud || 'Na'),
+          cloud: String(metadata.cloud || 'NaN'),
           cpuModel: String(metadata.cpu_model || 'NaN'),
           cpu: String(metadata.cpu || 'NaN'),
           ram: String(metadata.ram || 'NaN'),
@@ -90,6 +91,53 @@ const ProductDetail = () => {
         },
       };
     }, [productDetail, paymentCycle]);
+
+
+  const createCart = api.medusa.createCart.useMutation();
+  const addToCart = api.medusa.addToCart.useMutation();
+  // const completeOrder = api.medusa.completeOrder.useMutation();
+  const getRegions = api.medusa.getRegions.useQuery(); // Thay thế bằng ID vùng thực tế
+  console.log('getRegions', getRegions.data?.[0]?.id);
+
+  const handleInitOrder = async () => {
+    try {
+      // 1. Lấy cart_id hiện có từ máy người dùng
+      let cartId = localStorage.getItem("cart_id");
+
+      // 2. Nếu chưa có cart_id, lúc này mới tạo mới
+      if (!cartId) {
+        const { cart } = await createCart.mutateAsync({
+          id: getRegions.data?.[0]?.id || ''
+        });
+        cartId = cart.id;
+        localStorage.setItem("cart_id", cartId);
+      }
+
+      await addToCart.mutateAsync({
+        cart_id: cartId,
+        variant_id: productDetail?.variants?.[0]?.id || '',
+        quantity: 1,
+        metadata: {
+          status: 'unpaid'
+        }
+      });
+
+      // const {success, order, message} = await completeOrder.mutateAsync({ cart_id: cartId });
+      // console.log('success: ', success, 'product order: ', order)
+
+      setOrderData({
+        id: cartId,
+        name: variantName,
+        time: cycle.toString(),
+        total: total.toFixed(2) || ''
+      });
+
+      router.push('/order');
+    } catch (error) {
+      console.error('Error initializing order:', error);
+      alert('There was an error initializing your order. Please try again.');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -376,6 +424,7 @@ const ProductDetail = () => {
 
             <div className="mt-4 flex flex-col gap-4">
               <Button
+                onClick={handleInitOrder}
                 disabled={!agreedToTerms}
                 className="w-full !rounded-lg bg-white py-6 font-bold text-blue-600 hover:bg-gray-50"
               >

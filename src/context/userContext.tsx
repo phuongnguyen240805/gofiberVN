@@ -18,10 +18,25 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string>('');
 
-  // 1. Lấy token từ localStorage khi khởi tạo
   useEffect(() => {
-    const savedToken = localStorage.getItem('medusa_jwt') ?? '';
+    // 1. Hàm helper để lấy giá trị cookie theo tên
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      return null;
+    };
+
+    const cookieToken = getCookie('medusa_jwt');
+    const localToken = localStorage.getItem('medusa_jwt');
+
+    const savedToken = cookieToken || localToken || '';
+
     setToken(savedToken);
+
+    if (cookieToken && !localToken) {
+      localStorage.setItem('medusa_jwt', cookieToken);
+    }
   }, []);
 
   // 2. Gọi API lấy thông tin user

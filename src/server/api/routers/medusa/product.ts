@@ -35,6 +35,7 @@ export const productRouter = {
         // Lấy products theo mảng id
         const { products } = await medusaClient.store.product.list({
           id: input.ids, // Medusa cho phép truyền mảng
+          fields: '+metadata,+categories,*variants,*variants.prices,*variants.options,*variants.inventory_items'
         });
 
         return products;
